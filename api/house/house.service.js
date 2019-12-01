@@ -10,25 +10,28 @@ module.exports = {
     update
 }
 
-async function query() {
+async function query(filterBy = {}) {
+    // filterBy.txt = 'israel'
+    const criteria = _buildCriteria(filterBy);
+
     const collection = await dbService.getCollection('house', 'house_db')
     try {
         console.log('trying to')
-        const houses = await collection.find().toArray();
-      
-        return houses
+        const orders = await collection.find(criteria).toArray();
+
+        return orders
     } catch (err) {
-        console.log('ERROR: cannot find customers')
+        console.log('ERROR: cannot find houses')
         throw err;
     }
 }
 
 
 async function remove(houseId) {
-  console.log(houseId)
+    console.log(houseId)
     const collection = await dbService.getCollection('house', 'house_db')
     try {
-        await collection.deleteOne({"_id": ObjectId(houseId) })
+        await collection.deleteOne({ "_id": ObjectId(houseId) })
     } catch (err) {
         console.log(`ERROR: cannot remove house ${houseId}`)
         throw err;
@@ -52,7 +55,7 @@ async function add(house) {
 async function getById(houseId) {
     const collection = await dbService.getCollection('house', 'house_db')
     try {
-        const house = await collection.findOne({"_id":ObjectId(houseId)})
+        const house = await collection.findOne({ "_id": ObjectId(houseId) })
         return house
     } catch (err) {
         console.log(`ERROR: cannot find customer ${houseId}`)
@@ -62,11 +65,11 @@ async function getById(houseId) {
 
 async function update(house) {
     house._id = ObjectId(house._id);
-  
+
     const collection = await dbService.getCollection('house', 'house_db')
     try {
-   
-        await collection.updateOne({"_id":ObjectId(house._id)}, {$set : house})
+
+        await collection.updateOne({ "_id": ObjectId(house._id) }, { $set: house })
         return house
     } catch (err) {
         console.log(`ERROR: cannot update customer ${house.id}`)
@@ -74,9 +77,16 @@ async function update(house) {
     }
 }
 
+
+
 function _buildCriteria(filterBy) {
-    const criteria = {};
+    var criteria;
+    if (filterBy.txt) {
+        // criteria = { "location.address.country": `${filterBy.txt}` }
+        criteria = {'location.address.country': {'$regex': `${filterBy.txt}`,$options:'i'}}
+
+    }
+
     return criteria;
 }
-
 

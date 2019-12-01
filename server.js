@@ -13,6 +13,8 @@ const authRoutes = require('./api/auth/auth.routes')
 const userRoutes = require('./api/user/user.routes')
 const reviewRoutes = require('./api/review/review.routes')
 const houseRoutes = require('./api/house/house.routes')
+const orderRoutes = require('./api/order/order.routes')
+
 const connectSockets = require('./api/socket/socket.routes')
 
 
@@ -39,6 +41,8 @@ app.use('/api/auth', authRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/house', houseRoutes)
 app.use('/api/review', reviewRoutes)
+app.use('/api/order', orderRoutes)
+
 connectSockets(io)
 
 if (process.env.NODE_ENV === 'production') {

@@ -4,7 +4,11 @@
     "description": "production ready server",
     "main": "server.js",
     "scripts": {
+<<<<<<< HEAD
         "server:dev": "SET NODE_ENV=development && nodemon app.js",
+=======
+       "server:dev": " SET NODE_ENV=development && nodemon app.js",
+>>>>>>> 5feaae4c3755db48b49935baaea7f9b742de933f
         "server:prod": "node app.js"
     },
     "author": "moshe pinhasi",
