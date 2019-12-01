@@ -13,7 +13,7 @@ module.exports = {
 async function query(filterBy = {}) {
     // filterBy.txt = 'israel'
     const criteria = _buildCriteria(filterBy);
-
+    console.log("filter by", criteria)
     const collection = await dbService.getCollection('house', 'house_db')
     try {
         console.log('trying to')
@@ -81,12 +81,8 @@ async function update(house) {
 
 function _buildCriteria(filterBy) {
     var criteria;
-    if (filterBy.txt) {
-        // criteria = { "location.address.country": `${filterBy.txt}` }
-        criteria = {'location.address.country': {'$regex': `${filterBy.txt}`,$options:'i'}}
-
-    }
-
-    return criteria;
+    if (filterBy === "undefined") return criteria = {}
+    criteria = { 'location.address.country': { '$regex': `${filterBy}`, $options: 'i' } }
+    return criteria
 }
 

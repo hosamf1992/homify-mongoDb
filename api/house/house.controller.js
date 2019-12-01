@@ -1,8 +1,11 @@
 const houseService = require('./house.service')
 
 async function getHouses(req, res) {
+    let query=req.params.q
+    console.log(query)
+    const houses = await houseService.query(query)
+    // const houses = await houseService.query(req.query)
 
-    const houses = await houseService.query(req.query)
     res.send(houses)
 }
 
