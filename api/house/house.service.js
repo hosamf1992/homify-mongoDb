@@ -14,9 +14,9 @@ async function query() {
     const collection = await dbService.getCollection('house', 'house_db')
     try {
         console.log('trying to')
-        const houses = await collection.find().toArray();
+        const orders = await collection.find().toArray();
       
-        return houses
+        return orders
     } catch (err) {
         console.log('ERROR: cannot find customers')
         throw err;
