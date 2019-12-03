@@ -1,11 +1,19 @@
 const orderService = require('./order.service')
  
 async function getOrders(req, res) {
-    console.log(req.query);
-    const orders = await orderService.query(req.query)
+    const query=req.params.q
+    const id=req.params.id
+    const orders = await orderService.query(id,query)
     res.send(orders)
 }
 
+async function update(req,res){
+   
+    var updatedOrder = req.body;
+    const order= await orderService.update(updatedOrder)
+    res.send(order)
+
+}
 
 async function getById(req,res){
     let id=req.params.id
@@ -28,5 +36,6 @@ module.exports = {
    
     addOrder,
     getById,
-    getOrders
+    getOrders,
+    update
 }

@@ -5,28 +5,45 @@ const ObjectId = require('mongodb').ObjectId
 module.exports = {
     query,
     getById,
-    add
+    add,
+    update
 }
 
-async function query(filterBy = {}) {
+async function query(id, query) {
+    console.log('id is:', id, 'query is:', query)
+    var criteria;
+    if (query === 'ordersList') criteria = { 'user.userId': `${id}` };
+    if (query === 'ordersReq') criteria = { 'hostId': `${id}` };
     const collection = await dbService.getCollection('order', 'order_db')
     try {
-        console.log('trying to')
-        const reviews = await collection.find().toArray();
-      
-        return reviews
+        console.log(criteria)
+        const orders = await collection.find(criteria).toArray();
+
+        return orders
     } catch (err) {
-        console.log('ERROR: cannot find customers')
+        console.log('ERROR: cannot find Orders')
+        throw err;
+    }
+}
+async function update(order) {
+    order._id = ObjectId(order._id);
+
+    const collection = await dbService.getCollection('order', 'order_db')
+    try {
+        await collection.updateOne({ "_id": ObjectId(order._id) }, { $set: order })
+        return order
+    } catch (err) {
+        console.log(`ERROR: cannot update customer ${order._id}`)
         throw err;
     }
 }
 
 async function getById(orderId) {
-    
-    console.log('order id:',orderId)
+
+    console.log('order id:', orderId)
     const collection = await dbService.getCollection('order', 'order_db')
     try {
-        const order = await collection.findOne({"_id":ObjectId(orderId)})
+        const order = await collection.findOne({ "_id": ObjectId(orderId) })
         return order
     } catch (err) {
         console.log(`ERROR: cannot find order ${orderId}`)

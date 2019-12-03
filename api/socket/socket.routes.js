@@ -20,6 +20,8 @@ function connectSockets(io) {
             console.log(order)
             io.emit('get order details', order)
         })
+       
+
         socket.on('approve order', order=>{
             console.log('approved')
             io.emit('approve order', order)
@@ -29,4 +31,5 @@ function connectSockets(io) {
             io.emit('reject order', order)
         })
     })
+    
 }
