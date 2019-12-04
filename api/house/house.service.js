@@ -10,16 +10,18 @@ module.exports = {
     update
 }
 
-async function query(filterBy = {}) {
-   
+async function query(filterBy = {}, dates) {
     const criteria = _buildCriteria(filterBy);
+    console.log(dates)
     console.log("filter by", criteria)
     const collection = await dbService.getCollection('house', 'house_db')
     try {
-        console.log('trying to')
-        const orders = await collection.find(criteria).toArray();
-
-        return orders
+        const houses = await collection.find(criteria).toArray();
+        if (dates !== undefined) {
+            const filterd = await datesInRange(dates, houses)
+            return filterd
+        }
+        return houses
     } catch (err) {
         console.log('ERROR: cannot find houses')
         throw err;
@@ -39,7 +41,7 @@ async function remove(houseId) {
 }
 
 async function add(house) {
-   
+
 
     const collection = await dbService.getCollection('house', 'house_db')
     try {
@@ -83,4 +85,23 @@ function _buildCriteria(filterBy) {
     criteria = { 'location.address.country': { '$regex': `${filterBy}`, $options: 'i' } }
     return criteria
 }
+
+function datesInRange(date, houses) {
+    const dates = date.split(" ");
+    var startD = new Date(dates[0]);
+    var endD = new Date(dates[1]);
+    return houses.filter(house => {
+        const startDate = new Date(house.dates.from);
+        const endDate = new Date(house.dates.to);
+        return (startD >= startDate && endD <= endDate)
+
+    })
+
+}
+
+
+
+
+
+
 
