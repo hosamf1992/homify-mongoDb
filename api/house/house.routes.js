@@ -1,12 +1,14 @@
 const express = require('express')
 const { requireAuth, requireAdmin } = require('../../middlewares/requireAuth.middleware')
-const { addHouse, getHouses, deleteHouse, getById,update } = require('./house.controller')
+const { addHouse, getHouses, deleteHouse, getById,update,hostHouses } = require('./house.controller')
 const router = express.Router()
 
 // middleware that is specific to this router
 // router.use(requireAuth)
 
 router.get('/query/:q?', getHouses)
+router.get('/host/:id?', hostHouses)
+
 // router.get('/query/:q?/:d?', getHouses)
 
 router.get('/:id', getById)

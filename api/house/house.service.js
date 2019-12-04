@@ -7,7 +7,8 @@ module.exports = {
     remove,
     add,
     getById,
-    update
+    update,
+    hostHouses
 }
 
 async function query(filterBy = {}) {
@@ -22,6 +23,17 @@ async function query(filterBy = {}) {
         //     return filterd
         // }
         console.log(houses)
+        return houses
+    } catch (err) {
+        console.log('ERROR: cannot find houses')
+        throw err;
+    }
+}
+async function hostHouses(id) {
+   
+    const collection = await dbService.getCollection('house', 'house_db')
+    try {
+        const houses = await collection.find({"hostId":id}).toArray();
         return houses
     } catch (err) {
         console.log('ERROR: cannot find houses')

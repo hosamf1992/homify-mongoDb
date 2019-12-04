@@ -9,6 +9,13 @@ async function getHouses(req, res) {
 
     res.send(houses)
 }
+async function hostHouses(req, res) {
+    let query = req.params.id
+  
+    const houses = await houseService.hostHouses(query)
+
+    res.send(houses)
+}
 
 async function deleteHouse(req, res) {
     let id = req.params.id
@@ -47,5 +54,6 @@ module.exports = {
     deleteHouse,
     addHouse,
     getById,
-    update
+    update,
+    hostHouses
 }

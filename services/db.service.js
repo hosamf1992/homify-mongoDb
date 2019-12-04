@@ -1,6 +1,6 @@
 
 const MongoClient = require('mongodb').MongoClient;
-
+const uri = "mongodb+srv://amit:tutu@cluster0-fu2ws.mongodb.net/test?retryWrites=true&w=majority";
 const config = require('../config')
 
 module.exports = {
@@ -19,7 +19,9 @@ async function getCollection(collectionName, dbName) {
 async function connect(dbName) {
     if (dbConn) return dbConn;
     try {
-        const client = await MongoClient.connect(config.dbURL, { useNewUrlParser: true, useUnifiedTopology: true });
+      
+        const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+        // const client = await MongoClient.connect(config.dbURL, { useNewUrlParser: true, useUnifiedTopology: true });
         const db = client.db(dbName);
         dbConn = db;
         return db;
@@ -28,6 +30,8 @@ async function connect(dbName) {
         throw err;
     }
 }
+
+
 
 
 
