@@ -11,7 +11,7 @@ module.exports = {
 }
 
 async function query(filterBy = {}) {
-    // filterBy.txt = 'israel'
+   
     const criteria = _buildCriteria(filterBy);
     console.log("filter by", criteria)
     const collection = await dbService.getCollection('house', 'house_db')
@@ -39,9 +39,7 @@ async function remove(houseId) {
 }
 
 async function add(house) {
-    //later
-    // review.byUserId = ObjectId(review.byUserId);
-    // review.aboutUserId = ObjectId(review.aboutUserId);
+   
 
     const collection = await dbService.getCollection('house', 'house_db')
     try {
