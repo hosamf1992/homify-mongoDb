@@ -16,15 +16,19 @@ function connectSockets(io) {
         //     socket.join(topic)
         //     socket.myTopic = topic;
         // })
-        socket.on('order details', order=>{
-            console.log(order)
-            io.emit('get order details', order)
+        socket.on('order details', orderId=>{
+            console.log("got:",orderId)
+            io.emit('get order details', orderId)
         })
        
 
-        socket.on('approve order', order=>{
-            console.log('approved')
-            io.emit('approve order', order)
+        // socket.on('approve order', order=>{
+        //     console.log('approved')
+        //     io.emit('approve order', order)
+        // })
+        socket.on('response', res=>{
+            console.log(res)
+            io.emit('response order', res)
         })
         socket.on('reject order', order=>{
             console.log('rejected')

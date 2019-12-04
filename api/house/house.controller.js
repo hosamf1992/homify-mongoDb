@@ -2,9 +2,9 @@ const houseService = require('./house.service')
 
 async function getHouses(req, res) {
     let query = req.params.q
-    let dates = req.params.d
+    // let dates = req.params.d
     // console.log(query, dates)
-    const houses = await houseService.query(query,dates)
+    const houses = await houseService.query(query)
     // const houses = await houseService.query(req.query)
 
     res.send(houses)

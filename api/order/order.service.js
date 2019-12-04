@@ -14,7 +14,7 @@ async function query(id, query) {
     var criteria;
     if (query === 'ordersList') criteria = { 'user.userId': `${id}` };
     if (query === 'ordersReq') criteria = { 'hostId': `${id}` };
-    const collection = await dbService.getCollection('order', 'order_db')
+    const collection = await dbService.getCollection('order', 'house_db')
     try {
         console.log(criteria)
         const orders = await collection.find(criteria).toArray();
@@ -28,7 +28,7 @@ async function query(id, query) {
 async function update(order) {
     order._id = ObjectId(order._id);
 
-    const collection = await dbService.getCollection('order', 'order_db')
+    const collection = await dbService.getCollection('order', 'house_db')
     try {
         await collection.updateOne({ "_id": ObjectId(order._id) }, { $set: order })
         return order
@@ -41,7 +41,7 @@ async function update(order) {
 async function getById(orderId) {
 
     console.log('order id:', orderId)
-    const collection = await dbService.getCollection('order', 'order_db')
+    const collection = await dbService.getCollection('order', 'house_db')
     try {
         const order = await collection.findOne({ "_id": ObjectId(orderId) })
         return order
@@ -56,7 +56,7 @@ async function add(order) {
     // review.byUserId = ObjectId(review.byUserId);
     // review.aboutUserId = ObjectId(review.aboutUserId);
     console.log(order)
-    const collection = await dbService.getCollection('order', 'order_db')
+    const collection = await dbService.getCollection('order', 'house_db')
     try {
         await collection.insertOne(order);
         return order;

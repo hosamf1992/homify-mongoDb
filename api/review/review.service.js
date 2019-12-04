@@ -9,7 +9,7 @@ module.exports = {
 }
 
 async function query(filterBy = {}) {
-    const collection = await dbService.getCollection('review', 'review_db')
+    const collection = await dbService.getCollection('review', 'house_db')
     try {
         console.log('trying to')
         const reviews = await collection.find().toArray();
@@ -24,7 +24,7 @@ async function query(filterBy = {}) {
 async function getById(reviewId) {
     
     console.log(reviewId)
-    const collection = await dbService.getCollection('review', 'review_db')
+    const collection = await dbService.getCollection('review', 'house_db')
     try {
         const reviews = await collection.find({houseId:reviewId}).toArray();
         return reviews
@@ -39,7 +39,7 @@ async function add(review) {
     // review.byUserId = ObjectId(review.byUserId);
     // review.aboutUserId = ObjectId(review.aboutUserId);
 
-    const collection = await dbService.getCollection('review', 'review_db')
+    const collection = await dbService.getCollection('review', 'house_db')
     try {
         await collection.insertOne(review);
         return review;
