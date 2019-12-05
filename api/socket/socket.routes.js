@@ -30,10 +30,11 @@ function connectSockets(io) {
             console.log(res)
             io.emit('response order', res)
         })
-        socket.on('reject order', order=>{
-            console.log('rejected')
-            io.emit('reject order', order)
-        })
+        socket.on('disconnect', function () {
+            console.log('user disconnected');
+        });
+      
+
     })
     
 }
