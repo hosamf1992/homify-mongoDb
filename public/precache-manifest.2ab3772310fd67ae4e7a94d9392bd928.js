@@ -1,7 +1,7 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "ca97cdc9866086e122e5",
-    "url": "/css/app.5b72e94c.css"
+    "revision": "1f60da369d9ae3efa45a",
+    "url": "/css/app.a72c3628.css"
   },
   {
     "revision": "9b02592bacd6a42f50fc",
@@ -32,20 +32,40 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/bulb.bedf9676.png"
   },
   {
+    "revision": "bb18bdbbef437b2d50518db5a8292c94",
+    "url": "/img/email.bb18bdbb.jpg"
+  },
+  {
+    "revision": "9ad63cbcbda0be43e639c8e2a1fe8153",
+    "url": "/img/governmentId.9ad63cbc.png"
+  },
+  {
     "revision": "c278f85272c505b689ecfe500031c1e2",
     "url": "/img/logo.c278f852.png"
   },
   {
-    "revision": "ba6c63d91be2a02e3da691a87d3aec7c",
-    "url": "/img/star.ba6c63d9.png"
+    "revision": "8a6a1f90f0bc4d3883892f73575fe239",
+    "url": "/img/phone.8a6a1f90.png"
   },
   {
-    "revision": "ba9e022c1a85e27e20a6ecb608e2e99b",
+    "revision": "04e51ceb1f3b4e4428c9018041c29997",
+    "url": "/img/selfie.04e51ceb.png"
+  },
+  {
+    "revision": "09690cc6f7cb791c9b3a4c754f90592c",
+    "url": "/img/star.09690cc6.png"
+  },
+  {
+    "revision": "4ca5d0189bd5825de89fe451b77a5cc3",
+    "url": "/img/v.4ca5d018.png"
+  },
+  {
+    "revision": "d372dc76ba33ccc1c84910fa78edf407",
     "url": "/index.html"
   },
   {
-    "revision": "ca97cdc9866086e122e5",
-    "url": "/js/app.963dbe13.js"
+    "revision": "1f60da369d9ae3efa45a",
+    "url": "/js/app.166f92af.js"
   },
   {
     "revision": "9b02592bacd6a42f50fc",

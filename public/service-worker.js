@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.8605f03731dda9fb7a992310f2c2a0c9.js"
+  "/precache-manifest.2ab3772310fd67ae4e7a94d9392bd928.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "homify"});
