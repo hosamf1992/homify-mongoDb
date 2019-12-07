@@ -13,7 +13,6 @@ async function query(filterBy = {}) {
     try {
         console.log('trying to')
         const reviews = await collection.find().toArray();
-
         return reviews
     } catch (err) {
         console.log('ERROR: cannot find customers')
@@ -41,8 +40,6 @@ async function add(review) {
     const collection = await dbService.getCollection('review', 'house_db')
     try {
         await collection.insertOne(review);
-
-
         return review;
     } catch (err) {
         console.log(`ERROR: cannot insert user`)
