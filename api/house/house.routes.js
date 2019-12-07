@@ -6,10 +6,10 @@ const router = express.Router()
 // middleware that is specific to this router
 // router.use(requireAuth)
 
-router.get('/query/:q?', getHouses)
+// router.get('/query/:q?', getHouses)
 router.get('/host/:id?', hostHouses)
 
-// router.get('/query/:q?/:d?', getHouses)
+router.get('/query/:q?/:d?', getHouses)
 
 router.get('/:id', getById)
 // router.post('/',  requireAuth, addHouse)

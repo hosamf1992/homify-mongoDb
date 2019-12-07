@@ -11,18 +11,18 @@ module.exports = {
     hostHouses
 }
 
-async function query(filterBy = {}) {
+async function query(filterBy = {}, dates) {
     const criteria = _buildCriteria(filterBy);
-   
-    console.log("filter by", criteria)
+
+    console.log("filter by", criteria, dates)
     const collection = await dbService.getCollection('house', 'house_db')
     try {
         const houses = await collection.find(criteria).toArray();
-        // if (dates !== undefined) {
-        //     const filterd = await datesInRange(dates, houses)
-        //     return filterd
-        // }
-        console.log(houses)
+        if (dates !== undefined) {
+            const filterd = await datesInRange(dates, houses)
+            return filterd
+        }
+        // console.log(houses)
         return houses
     } catch (err) {
         console.log('ERROR: cannot find houses')
@@ -30,10 +30,10 @@ async function query(filterBy = {}) {
     }
 }
 async function hostHouses(id) {
-   
+
     const collection = await dbService.getCollection('house', 'house_db')
     try {
-        const houses = await collection.find({"hostId":id}).toArray();
+        const houses = await collection.find({ "hostId": id }).toArray();
         return houses
     } catch (err) {
         console.log('ERROR: cannot find houses')
@@ -100,17 +100,30 @@ function _buildCriteria(filterBy) {
 }
 
 function datesInRange(date, houses) {
+
     const dates = date.split(" ");
+    var msg;
     var startD = new Date(dates[0]);
     var endD = new Date(dates[1]);
-    var min;
-    var max;
     return houses.filter(house => {
-        const startDate = new Date(house.dates.from);
-        const endDate = new Date(house.dates.to);
-        // return (startD >= startDate && endD <= endDate)
+        const d1 = new Date(house.dates.from);
+        const d2 = new Date(house.dates.to);
+        return (d2 >= endD && startD >= d1 || endD >= d2 && d1 >= startD)
+
+        // if (startD >= d1) {
+        //     if (d2 >= endD) {
+        //         console.log('first yes')
+        //     }
+        // }
+        // if (d1 >= startD) {
+        //     if (endD >= d2) {
+        //         console.log('second yes')
+        //     }
+        // }
+        // console.log('no')
 
     })
+
 
 }
 
