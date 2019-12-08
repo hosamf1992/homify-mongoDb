@@ -9,7 +9,6 @@ function connectSockets(io) {
             io.emit('get order details', orderId)
         })
        
-       
         socket.on('response', res=>{
             io.emit('response order', res)
         })

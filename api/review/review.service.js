@@ -1,16 +1,13 @@
-
 const dbService = require('../../services/db.service')
 const ObjectId = require('mongodb').ObjectId
 const logger = require('../../services/logger.service')
 
 module.exports = {
-
     query,
     add
 }
 
 async function query(houseId) {
-
     const collection = await dbService.getCollection('review')
     try {
         const reviews = await collection.find({ houseId: houseId }).toArray();
@@ -44,6 +41,7 @@ async function setRating(id, avgRate) {
         throw err;
     }
 }
+
 function calcRating(reviews) {
     var sum = 0;
     var reviewsCount = 0;
@@ -51,8 +49,7 @@ function calcRating(reviews) {
     reviews.forEach(review => {
         reviewsCount++;
         sum += +review.rating;
-        rateMap[review.rating] = (rateMap[review.rating]) ? rateMap[review.rating] + 1 : 1
-        // rateMap[review.rating] = rateMap[review.rating] + 1 || 1; 
+        rateMap[review.rating] = rateMap[review.rating] + 1 || 1; 
     })
     var average = sum / reviewsCount;
     var rating = {
@@ -60,15 +57,10 @@ function calcRating(reviews) {
         count: reviewsCount
     }
     return rating
-
 }
+
 async function getCurrHousRevs(houseId) {
     const collection = await dbService.getCollection('review')
     const reviews = await collection.find({ houseId: houseId }).toArray();
     return reviews
-
 }
-
-
-
-
