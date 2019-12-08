@@ -1,7 +1,7 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "1f60da369d9ae3efa45a",
-    "url": "/css/app.a72c3628.css"
+    "revision": "ff7b82cabb3fd4056679",
+    "url": "/css/app.c30ade14.css"
   },
   {
     "revision": "9b02592bacd6a42f50fc",
@@ -28,10 +28,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/Shachal Ami-Ad.78d6ddc0.jpeg"
   },
   {
-    "revision": "bedf96769d8537ef6a826ee54c6cc3ec",
-    "url": "/img/bulb.bedf9676.png"
-  },
-  {
     "revision": "bb18bdbbef437b2d50518db5a8292c94",
     "url": "/img/email.bb18bdbb.jpg"
   },
@@ -42,10 +38,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "c278f85272c505b689ecfe500031c1e2",
     "url": "/img/logo.c278f852.png"
-  },
-  {
-    "revision": "8a6a1f90f0bc4d3883892f73575fe239",
-    "url": "/img/phone.8a6a1f90.png"
   },
   {
     "revision": "04e51ceb1f3b4e4428c9018041c29997",
@@ -60,12 +52,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/v.4ca5d018.png"
   },
   {
-    "revision": "d372dc76ba33ccc1c84910fa78edf407",
+    "revision": "bdf75af0eef19a43062681ce0a4867eb",
     "url": "/index.html"
   },
   {
-    "revision": "1f60da369d9ae3efa45a",
-    "url": "/js/app.166f92af.js"
+    "revision": "ff7b82cabb3fd4056679",
+    "url": "/js/app.642859f1.js"
   },
   {
     "revision": "9b02592bacd6a42f50fc",
