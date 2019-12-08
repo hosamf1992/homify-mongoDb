@@ -15,7 +15,7 @@ async function query(filterBy = {}, dates) {
     const criteria = _buildCriteria(filterBy);
 
     console.log("filter by", criteria, dates)
-    const collection = await dbService.getCollection('house', 'house_db')
+    const collection = await dbService.getCollection('house')
     try {
         const houses = await collection.find(criteria).toArray();
         if (dates !== undefined) {
@@ -31,7 +31,7 @@ async function query(filterBy = {}, dates) {
 }
 async function hostHouses(id) {
 
-    const collection = await dbService.getCollection('house', 'house_db')
+    const collection = await dbService.getCollection('house')
     try {
         const houses = await collection.find({ "hostId": id }).toArray();
         return houses
@@ -44,7 +44,7 @@ async function hostHouses(id) {
 
 async function remove(houseId) {
     console.log(houseId)
-    const collection = await dbService.getCollection('house', 'house_db')
+    const collection = await dbService.getCollection('house')
     try {
         await collection.deleteOne({ "_id": ObjectId(houseId) })
     } catch (err) {
@@ -56,7 +56,7 @@ async function remove(houseId) {
 async function add(house) {
 
 
-    const collection = await dbService.getCollection('house', 'house_db')
+    const collection = await dbService.getCollection('house')
     try {
         await collection.insertOne(house);
         return house;
@@ -66,7 +66,7 @@ async function add(house) {
     }
 }
 async function getById(houseId) {
-    const collection = await dbService.getCollection('house', 'house_db')
+    const collection = await dbService.getCollection('house')
     try {
         const house = await collection.findOne({ "_id": ObjectId(houseId) })
         return house
@@ -79,7 +79,7 @@ async function getById(houseId) {
 async function update(house) {
     house._id = ObjectId(house._id);
 
-    const collection = await dbService.getCollection('house', 'house_db')
+    const collection = await dbService.getCollection('house')
     try {
 
         await collection.updateOne({ "_id": ObjectId(house._id) }, { $set: house })
@@ -109,18 +109,6 @@ function datesInRange(date, houses) {
         const d1 = new Date(house.dates.from);
         const d2 = new Date(house.dates.to);
         return (d2 >= endD && startD >= d1 || endD >= d2 && d1 >= startD)
-
-        // if (startD >= d1) {
-        //     if (d2 >= endD) {
-        //         console.log('first yes')
-        //     }
-        // }
-        // if (d1 >= startD) {
-        //     if (endD >= d2) {
-        //         console.log('second yes')
-        //     }
-        // }
-        // console.log('no')
 
     })
 

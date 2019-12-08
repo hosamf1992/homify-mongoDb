@@ -10,13 +10,13 @@ module.exports = {
 // Database Name
 
 var dbConn = null;
-
-async function getCollection(collectionName, dbName) {
-    const db = await connect(dbName)
+const dbName = 'house_db';
+async function getCollection(collectionName) {
+    const db = await connect()
     return db.collection(collectionName);
 }
 
-async function connect(dbName) {
+async function connect() {
     if (dbConn) return dbConn;
     try {
       

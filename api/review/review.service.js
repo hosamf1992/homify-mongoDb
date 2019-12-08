@@ -9,7 +9,7 @@ module.exports = {
 }
 
 async function query(filterBy = {}) {
-    const collection = await dbService.getCollection('review', 'house_db')
+    const collection = await dbService.getCollection('review')
     try {
         console.log('trying to')
         const reviews = await collection.find().toArray();
@@ -23,7 +23,7 @@ async function query(filterBy = {}) {
 async function getById(reviewId) {
 
     // console.log(reviewId)
-    const collection = await dbService.getCollection('review', 'house_db')
+    const collection = await dbService.getCollection('review')
     try {
         const reviews = await collection.find({ houseId: reviewId }).toArray();
         const rate = calcRating(reviews)
@@ -37,7 +37,7 @@ async function getById(reviewId) {
 
 async function add(review) {
 
-    const collection = await dbService.getCollection('review', 'house_db')
+    const collection = await dbService.getCollection('review')
     try {
         await collection.insertOne(review);
         return review;
@@ -48,7 +48,7 @@ async function add(review) {
 }
 
 async function setRating(id, avgRate) {
-    const collection = await dbService.getCollection('house', 'house_db')
+    const collection = await dbService.getCollection('house')
     try {
         console.log('trying to update')
         collection.updateOne({ "_id": ObjectId(id) }, { $set: { "reviews.avgRating": `${avgRate.avg}`,"reviews.reviewCount": `${avgRate.count}` } });
@@ -60,21 +60,20 @@ async function setRating(id, avgRate) {
 function calcRating(reviews) {
     var sum = 0;
     var reviewsCount = 0;
-    var average=0;
     var rateMap = {};
-    var rating = {}
     reviews.forEach(review => {
         reviewsCount++;
         sum += +review.rating;
-        if (!rateMap[review.rating]) { rateMap[review.rating] = 1 }
-        else { rateMap[review.rating] += 1 }
-    });
-    average = sum / reviewsCount;
-    rating = {
+        rateMap[review.rating] = (rateMap[review.rating])? rateMap[review.rating] + 1 : 1 
+        // rateMap[review.rating] = rateMap[review.rating] + 1 || 1; 
+    })
+   var average = sum / reviewsCount;
+   var rating = {
         avg: average.toFixed(1),
         count: reviewsCount
     }
     return rating
+
 
 }
 
