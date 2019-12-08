@@ -49,7 +49,7 @@ function calcRating(reviews) {
     reviews.forEach(review => {
         reviewsCount++;
         sum += +review.rating;
-        rateMap[review.rating] = rateMap[review.rating] + 1 || 1; 
+        rateMap[review.rating] = rateMap[review.rating] + 1 || 1;
     })
     var average = sum / reviewsCount;
     var rating = {
