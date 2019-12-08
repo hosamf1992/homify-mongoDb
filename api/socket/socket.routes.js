@@ -14,7 +14,7 @@ function connectSockets(io) {
             io.emit('response order', res)
         })
         socket.on('disconnect', function () {
-            logger.info('user disconnected')
+            logger.info('user connect')
         });
       
 
