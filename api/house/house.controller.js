@@ -3,7 +3,6 @@ const houseService = require('./house.service')
 async function getHouses(req, res) {
     let query = req.params.q
     let dates = req.params.d
-    console.log(query, dates)
     const houses = await houseService.query(query,dates)
     // const houses = await houseService.query(req.query)
 
@@ -25,7 +24,6 @@ async function deleteHouse(req, res) {
 
 async function addHouse(req, res) {
     var house = req.body;
-    console.log(house)
     //later
     // house.byUserId = req.session.user._id;
     house = await houseService.add(house)
@@ -40,10 +38,7 @@ async function getById(req, res) {
 
 }
 async function update(req, res) {
-    console.log('updating')
     var updatedHouse = req.body;
-    console.log('updating', updatedHouse)
-
     const house = await houseService.update(updatedHouse)
     res.send(house)
 

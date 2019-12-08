@@ -2,6 +2,7 @@
 const dbService = require('../../services/db.service')
 const reviewService = require('../review/review.service')
 const ObjectId = require('mongodb').ObjectId
+const logger = require('../../services/logger.service')
 
 module.exports = {
     query,
@@ -41,7 +42,7 @@ async function getById(userId) {
 
         return user
     } catch (err) {
-        console.log(`ERROR: while finding user ${userId}`)
+        logger.error(`ERROR: while finding user ${userId}`)
         throw err;
     }
 }
@@ -61,7 +62,7 @@ async function remove(userId) {
     try {
         await collection.deleteOne({ "_id": ObjectId(userId) })
     } catch (err) {
-        console.log(`ERROR: cannot remove user ${userId}`)
+        logger.error(`ERROR: cannot remove user ${userId}`)
         throw err;
     }
 }
@@ -74,7 +75,7 @@ async function update(user) {
         await collection.replaceOne({ "_id": user._id }, { $set: user })
         return user
     } catch (err) {
-        console.log(`ERROR: cannot update user ${user._id}`)
+        logger.error(`ERROR: cannot update user ${user._id}`)
         throw err;
     }
 }

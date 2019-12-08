@@ -1,6 +1,7 @@
 
 const dbService = require('../../services/db.service')
 const ObjectId = require('mongodb').ObjectId
+const logger = require('../../services/logger.service')
 
 module.exports = {
     query,

@@ -41,7 +41,6 @@ async function hostHouses(id) {
 
 
 async function remove(houseId) {
-    console.log(houseId)
     const collection = await dbService.getCollection('house')
     try {
         await collection.deleteOne({ "_id": ObjectId(houseId) })
