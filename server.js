@@ -1,22 +1,18 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const cors = require('cors')
-const path = require('path')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
-
+const cors = require('cors')
+const path = require('path')
 const app = express()
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
-
 const authRoutes = require('./api/auth/auth.routes')
 const userRoutes = require('./api/user/user.routes')
 const reviewRoutes = require('./api/review/review.routes')
 const houseRoutes = require('./api/house/house.routes')
 const orderRoutes = require('./api/order/order.routes')
-
 const connectSockets = require('./api/socket/socket.routes')
-
 
 app.use(cookieParser())
 app.use(bodyParser.json());
@@ -25,8 +21,7 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     cookie: { secure: false }
-  }))
-
+}))
 
 if (process.env.NODE_ENV !== 'production') {
     const corsOptions = {
