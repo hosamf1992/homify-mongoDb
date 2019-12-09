@@ -17,7 +17,6 @@ async function update(req,res){
 
 async function getById(req,res){
     let id=req.params.id
-    console.log(id)
     const orders= await orderService.getById(id)
     res.send(orders)
 

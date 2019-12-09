@@ -1,6 +1,8 @@
 const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb+srv://amit:tutu@cluster0-fu2ws.mongodb.net/test?retryWrites=true&w=majority";
 const config = require('../config')
+const logger = require('./logger.service')
+
 
 module.exports = {
     getCollection
@@ -8,13 +10,13 @@ module.exports = {
 
 // Database Name
 var dbConn = null;
-
-async function getCollection(collectionName, dbName) {
-    const db = await connect(dbName)
+const dbName = 'house_db';
+async function getCollection(collectionName) {
+    const db = await connect()
     return db.collection(collectionName);
 }
 
-async function connect(dbName) {
+async function connect() {
     if (dbConn) return dbConn;
     try {
         const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -23,7 +25,7 @@ async function connect(dbName) {
         dbConn = db;
         return db;
     } catch (err) {
-        console.log('Cannot Connect to DB', err)
+        logger.error('Cannot Connect to DB', err)
         throw err;
     }
 }
