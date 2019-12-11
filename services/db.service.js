@@ -3,7 +3,6 @@ const uri = "mongodb+srv://amit:tutu@cluster0-fu2ws.mongodb.net/test?retryWrites
 const config = require('../config')
 const logger = require('./logger.service')
 
-
 module.exports = {
     getCollection
 }

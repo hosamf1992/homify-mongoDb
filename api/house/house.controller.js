@@ -3,16 +3,14 @@ const houseService = require('./house.service')
 async function getHouses(req, res) {
     let query = req.params.q
     let dates = req.params.d
-    const houses = await houseService.query(query,dates)
+    const houses = await houseService.query(query, dates)
     // const houses = await houseService.query(req.query)
-
     res.send(houses)
 }
+
 async function hostHouses(req, res) {
     let query = req.params.id
-  
     const houses = await houseService.hostHouses(query)
-
     res.send(houses)
 }
 
@@ -31,17 +29,17 @@ async function addHouse(req, res) {
     // house.aboutUser = {} 
     res.send(house)
 }
+
 async function getById(req, res) {
     let id = req.params.id
     const house = await houseService.getById(id)
     res.send(house)
-
 }
+
 async function update(req, res) {
     var updatedHouse = req.body;
     const house = await houseService.update(updatedHouse)
     res.send(house)
-
 }
 
 module.exports = {

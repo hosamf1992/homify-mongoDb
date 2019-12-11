@@ -1,7 +1,7 @@
-
 const dbService = require('../../services/db.service')
 const ObjectId = require('mongodb').ObjectId
 const logger = require('../../services/logger.service')
+
 module.exports = {
     query,
     remove,
@@ -13,13 +13,12 @@ module.exports = {
 
 async function query(filterBy = {}, dates) {
     const criteria = _buildCriteria(filterBy);
-
     const collection = await dbService.getCollection('house')
     try {
         const houses = await collection.find(criteria).toArray();
         if (dates !== undefined) {
-            const filterd = await datesInRange(dates, houses)
-            return filterd
+            const filtered = await datesInRange(dates, houses)
+            return filtered
         }
         return houses
     } catch (err) {
@@ -27,8 +26,8 @@ async function query(filterBy = {}, dates) {
         throw err;
     }
 }
-async function hostHouses(id) {
 
+async function hostHouses(id) {
     const collection = await dbService.getCollection('house')
     try {
         const houses = await collection.find({ "hostId": id }).toArray();
@@ -38,7 +37,6 @@ async function hostHouses(id) {
         throw err;
     }
 }
-
 
 async function remove(houseId) {
     const collection = await dbService.getCollection('house')
@@ -51,8 +49,6 @@ async function remove(houseId) {
 }
 
 async function add(house) {
-
-
     const collection = await dbService.getCollection('house')
     try {
         await collection.insertOne(house);
@@ -62,6 +58,7 @@ async function add(house) {
         throw err;
     }
 }
+
 async function getById(houseId) {
     const collection = await dbService.getCollection('house')
     try {
@@ -75,10 +72,8 @@ async function getById(houseId) {
 
 async function update(house) {
     house._id = ObjectId(house._id);
-
     const collection = await dbService.getCollection('house')
     try {
-
         await collection.updateOne({ "_id": ObjectId(house._id) }, { $set: house })
         return house
     } catch (err) {
@@ -86,8 +81,6 @@ async function update(house) {
         throw err;
     }
 }
-
-
 
 function _buildCriteria(filterBy) {
     var criteria;
@@ -97,7 +90,6 @@ function _buildCriteria(filterBy) {
 }
 
 function datesInRange(date, houses) {
-
     const dates = date.split(" ");
     var startD = new Date(dates[0]);
     var endD = new Date(dates[1]);
@@ -106,13 +98,4 @@ function datesInRange(date, houses) {
         const d2 = new Date(house.dates.to);
         return (d2 >= endD && startD >= d1 || endD >= d2 && d1 >= startD)
     })
-
-
 }
-
-
-
-
-
-
-

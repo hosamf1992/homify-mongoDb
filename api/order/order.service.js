@@ -1,14 +1,6 @@
-
 const dbService = require('../../services/db.service')
 const ObjectId = require('mongodb').ObjectId
 const logger = require('../../services/logger.service')
-
-module.exports = {
-    query,
-    getById,
-    add,
-    update
-}
 
 async function query(id, query) {
     var criteria;
@@ -17,13 +9,13 @@ async function query(id, query) {
     const collection = await dbService.getCollection('order')
     try {
         const orders = await collection.find(criteria).toArray();
-
         return orders
     } catch (err) {
         logger.error(`ERROR: cannot find  order`)
         throw err;
     }
 }
+
 async function update(order) {
     order._id = ObjectId(order._id);
     const collection = await dbService.getCollection('order')
@@ -37,7 +29,6 @@ async function update(order) {
 }
 
 async function getById(orderId) {
-
     const collection = await dbService.getCollection('order')
     try {
         const order = await collection.findOne({ "_id": ObjectId(orderId) })
@@ -49,8 +40,6 @@ async function getById(orderId) {
 }
 
 async function add(order) {
-
-  
     const collection = await dbService.getCollection('order')
     try {
         await collection.insertOne(order);
@@ -61,5 +50,9 @@ async function add(order) {
     }
 }
 
-
-
+module.exports = {
+    query,
+    getById,
+    add,
+    update
+}

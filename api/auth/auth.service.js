@@ -1,7 +1,6 @@
 const bcrypt = require('bcrypt')
 const userService = require('../user/user.service')
 const logger = require('../../services/logger.service')
-
 const saltRounds = 10
 
 async function login(email, password) {
@@ -15,11 +14,11 @@ async function login(email, password) {
     return user;
 }
 
-async function signup(email, password, username,img) {
+async function signup(email, password, username, img) {
     logger.debug(`auth.service - signup with email: ${email}, username: ${username}`)
     if (!email || !password || !username) return Promise.reject('email, username and password are required!')
     const hash = await bcrypt.hash(password, saltRounds)
-    return userService.add({email, password: hash, username,img})
+    return userService.add({ email, password: hash, username, img })
 }
 
 module.exports = {

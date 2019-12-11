@@ -1,4 +1,3 @@
-
 const dbService = require('../../services/db.service')
 const reviewService = require('../review/review.service')
 const ObjectId = require('mongodb').ObjectId
@@ -38,14 +37,13 @@ async function getById(userId) {
             delete review.byUser
             return review
         })
-
-
         return user
     } catch (err) {
         logger.error(`ERROR: while finding user ${userId}`)
         throw err;
     }
 }
+
 async function getByEmail(email) {
     const collection = await dbService.getCollection('user')
     try {
@@ -99,5 +97,3 @@ function _buildCriteria(filterBy) {
     }
     return criteria;
 }
-
-
